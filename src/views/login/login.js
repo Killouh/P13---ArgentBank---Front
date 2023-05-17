@@ -1,32 +1,98 @@
-import React from 'react';
 import './login.css';
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../api/authentification';
+import { useNavigate } from 'react-router-dom'
+import {
+  logingPending,
+  logingSuccess,
+  logingError,
+  logingRemember,
+} from '../../features/reducer/loginreducer'
 
 export default function Login() {
+  const { isLoggedIn,isLoading, error, isRemember } = useSelector((state) => state.login)
+  const dispatch = useDispatch()
+  let navigate = useNavigate()
+  const [credientials, setCredientials] = useState({
+    email: '',
+    password: '',
+  })
+
+  function handleChange({ currentTarget }) {
+    const { value, name } = currentTarget
+    setCredientials({
+      ...credientials,
+      [name]: value,
+    })
+  }
+
+  function errorDisplay(error) {
+    window.alert(error);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    dispatch(logingPending())
+    try {
+      const isAuth = await loginUser(credientials)
+      console.log(isAuth)
+
+      if (isRemember) {
+        localStorage.setItem('token', isAuth.body.token)
+      } else {
+        localStorage.removeItem('token')
+      }
+
+      dispatch(logingSuccess())
+      navigate('/profile')
+    } catch (error) {
+      console.log(error)
+      dispatch(logingError(error.response.data.message))
+      errorDisplay(error.response.data.message);
+    }
+  }
+
+
 
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label
-            ><input type="text" id="username" />
+            ><input
+              type="text"
+              placeholder="Username"
+              name="email"
+              onChange={handleChange} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label
-            ><input type="password" id="password" />
+            ><input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange} />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
-          </div>
-          <p>PLACEHOLDER DUE TO STATIC SITE</p>
-          <Link to="/profile" className="sign-in-button">Sign In</Link>
-          <p>SHOULD BE THE BUTTON BELOW</p>
-          <button className="sign-in-button">Sign In</button>
+              <input
+                type="checkbox"
+                id="remember-me"
+                name="remember-me"
+                defaultChecked={isRemember}
+                onChange={() => dispatch(logingRemember(!isRemember))}
+              />
+              <label htmlFor="remember-me">Remember me</label>
+            </div>
+          <button type="submit" variant="success" className="sign-in-button">
+              Sign In
+            </button>
         </form>
       </section>
     </main>
-    );
+  );
 }
