@@ -9,6 +9,8 @@ import Login from './views/login/login';
 import Profile from './views/profile/profile';
 // import RouteProtector from './utils/route_protector';
 
+//Rendre profile inacessible si non connecté
+
 function App() {
   return (
 		<div id="App">

@@ -9,6 +9,7 @@ export async function loginUser(credientials) {
       if (token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       else delete axios.defaults.headers.common['Authorization']
+      console.log(res.data)
       resolve(res.data)
     } catch (error) {
       reject(error)

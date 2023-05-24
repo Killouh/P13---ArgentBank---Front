@@ -8,10 +8,12 @@ import {
   logingSuccess,
   logingError,
   logingRemember,
-} from '../../features/reducer/loginreducer'
+} from '../../features/reducer/loginreducer';
+
+
 
 export default function Login() {
-  const { isLoggedIn,isLoading, error, isRemember } = useSelector((state) => state.login)
+  const { isRemember } = useSelector((state) => state.login)
   const dispatch = useDispatch()
   let navigate = useNavigate()
   const [credientials, setCredientials] = useState({
@@ -37,8 +39,7 @@ export default function Login() {
     dispatch(logingPending())
     try {
       const isAuth = await loginUser(credientials)
-      console.log(isAuth)
-
+      console.log(isAuth.body);
       if (isRemember) {
         localStorage.setItem('token', isAuth.body.token)
       } else {

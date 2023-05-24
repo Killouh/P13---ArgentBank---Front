@@ -1,13 +1,47 @@
 import React from 'react';
 import './profile.css';
+import { profileUser } from '../../api/user';
+import { useDispatch, useSelector } from 'react-redux'
+import { profileFirstName, profileLastName, profileError } from '../../features/reducer/profilereducer'
 
 
-export default function Home() {
- 
+
+export default function Profile() {
+    const dispatch = useDispatch()
+     // Récupération des données depuis le store
+  const firstName = useSelector((state) => state.profile.firstName);
+  const lastName = useSelector((state) => state.profile.lastName);
+    const { isRemember } = useSelector((state) => state.login)
+    function errorDisplay(error) {
+      window.alert(error);
+    }
+  
+    profileUser()
+      .then((data) => {
+        dispatch(profileFirstName(data.body.firstName))
+        dispatch(profileLastName(data.body.lastName))
+        console.log(data.body.firstName);
+        console.log(data.body.firstName);
+        
+  
+  
+        if (isRemember) {
+          localStorage.setItem('firstName', data.body.firstName)
+          localStorage.setItem('lastName', data.body.lastName)
+        } else {
+          localStorage.removeItem('firstName')
+          localStorage.removeItem('lastName')
+        }
+      })
+      .catch((error) => {
+        dispatch(profileError(error.response.data.message))
+        errorDisplay(error.response.data.message);
+      });
+  
     return (
       <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />Tony Jarvis!</h1>
+        <h1>Welcome back<br />{firstName} {lastName}</h1>
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>
@@ -44,3 +78,4 @@ export default function Home() {
     </main>
     );
   }
+  
