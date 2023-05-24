@@ -7,7 +7,6 @@ import Footer from './components/footer/footer'
 import Home from './views/home/home';
 import Login from './views/login/login';
 import Profile from './views/profile/profile';
-// import RouteProtector from './utils/route_protector';
 
 //Rendre profile inacessible si non connecté
 

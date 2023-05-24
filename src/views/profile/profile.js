@@ -1,40 +1,44 @@
-import React from 'react';
+import {useEffect, useRef} from 'react';
 import './profile.css';
 import { profileUser } from '../../api/user';
 import { useDispatch, useSelector } from 'react-redux'
 import { profileFirstName, profileLastName, profileError } from '../../features/reducer/profilereduceur'
 import UserEdit from '../../components/useredit/useredit'
-import { useEffect } from 'react'
 
 
 export default function Profile() {
-  const dispatch = useDispatch()
-  const { isRemember } = useSelector((state) => state.login)
-
+  const dispatch = useDispatch();
+  const { isRemember } = useSelector((state) => state.login);
+  const isFirstResponse = useRef(true);
 
   function errorDisplay(error) {
     window.alert(error);
   }
+
   useEffect(() => {
     profileUser()
-    
       .then((data) => {
-        dispatch(profileFirstName(data.body.firstName))
-        dispatch(profileLastName(data.body.lastName))
+        if (isFirstResponse.current) {
+          dispatch(profileFirstName(data.body.firstName));
+          dispatch(profileLastName(data.body.lastName));
 
-        if (isRemember) {
-          localStorage.setItem('firstName', data.body.firstName)
-          localStorage.setItem('lastName', data.body.lastName)
-        } else {
-          localStorage.removeItem('firstName')
-          localStorage.removeItem('lastName')
+          if (isRemember) {
+            localStorage.setItem('firstName', data.body.firstName);
+            localStorage.setItem('lastName', data.body.lastName);
+          } else {
+            localStorage.removeItem('firstName');
+            localStorage.removeItem('lastName');
+          }
+
+          isFirstResponse.current = false; // Marquer que la première réponse a été traitée
         }
       })
       .catch((error) => {
-        dispatch(profileError(error.response.data.message))
+        dispatch(profileError(error.response.data.message));
         errorDisplay(error.response.data.message);
       });
   }, [dispatch, isRemember]);
+
 
   return (
     <main className="main bg-dark">
