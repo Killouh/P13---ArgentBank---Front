@@ -29,7 +29,6 @@ const loginSlice = createSlice({
     logingOut: (state) => {
       state.isLoading = false
       state.isAuth = false
-      state.isRemember = false
       state.error = ''
     },
   },

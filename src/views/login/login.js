@@ -16,6 +16,7 @@ export default function Login() {
   const { isRemember } = useSelector((state) => state.login)
   const dispatch = useDispatch()
   let navigate = useNavigate()
+
   const [credientials, setCredientials] = useState({
     email: '',
     password: '',
@@ -36,12 +37,14 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
 
+
     dispatch(logingPending())
     try {
       const isAuth = await loginUser(credientials)
-      console.log(isAuth.body);
       if (isRemember) {
         localStorage.setItem('token', isAuth.body.token)
+
+        
       } else {
         localStorage.removeItem('token')
       }

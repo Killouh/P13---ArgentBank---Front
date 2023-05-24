@@ -23,9 +23,6 @@ function App() {
 						<Route path="/index" element={<Home />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/profile" element={<Profile />} />
-						{/* <Route element={<RouteProtector />} >
-							<Route path="/profile" element={<Profile />} />
-						</ Route> */}
 						<Route path="*" element={<Home />} />
 					</ Routes>
 				</main>

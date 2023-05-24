@@ -1,0 +1,26 @@
+.header-blank-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2%;
+}
+
+.input-firstname{
+    height: 25px;
+}
+
+.input-lastname{
+    height: 25px;
+}
+
+.action-buttons{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2%;
+}
+
+.edit-button{
+width: 100px;
+}

@@ -2,29 +2,26 @@ import React from 'react';
 import './profile.css';
 import { profileUser } from '../../api/user';
 import { useDispatch, useSelector } from 'react-redux'
-import { profileFirstName, profileLastName, profileError } from '../../features/reducer/profilereducer'
-
+import { profileFirstName, profileLastName, profileError } from '../../features/reducer/profilereduceur'
+import UserEdit from '../../components/useredit/useredit'
+import { useEffect } from 'react'
 
 
 export default function Profile() {
-    const dispatch = useDispatch()
-     // Récupération des données depuis le store
-  const firstName = useSelector((state) => state.profile.firstName);
-  const lastName = useSelector((state) => state.profile.lastName);
-    const { isRemember } = useSelector((state) => state.login)
-    function errorDisplay(error) {
-      window.alert(error);
-    }
-  
+  const dispatch = useDispatch()
+  const { isRemember } = useSelector((state) => state.login)
+
+
+  function errorDisplay(error) {
+    window.alert(error);
+  }
+  useEffect(() => {
     profileUser()
+    
       .then((data) => {
         dispatch(profileFirstName(data.body.firstName))
         dispatch(profileLastName(data.body.lastName))
-        console.log(data.body.firstName);
-        console.log(data.body.firstName);
-        
-  
-  
+
         if (isRemember) {
           localStorage.setItem('firstName', data.body.firstName)
           localStorage.setItem('lastName', data.body.lastName)
@@ -37,13 +34,11 @@ export default function Profile() {
         dispatch(profileError(error.response.data.message))
         errorDisplay(error.response.data.message);
       });
-  
-    return (
-      <main className="main bg-dark">
-      <div className="header">
-        <h1>Welcome back<br />{firstName} {lastName}</h1>
-        <button className="edit-button">Edit Name</button>
-      </div>
+  }, [dispatch, isRemember]);
+
+  return (
+    <main className="main bg-dark">
+      <UserEdit />
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
         <div className="account-content-wrapper">
@@ -76,6 +71,5 @@ export default function Profile() {
         </div>
       </section>
     </main>
-    );
-  }
-  
+  );
+}

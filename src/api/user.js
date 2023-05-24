@@ -11,3 +11,20 @@ export async function profileUser() {
     }
   })
 }
+
+export async function userUpDate(userFirstLastName) {
+  console.log(userFirstLastName)
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.put(URL_PROFILE, userFirstLastName)
+
+      console.log(res)
+
+      resolve(res.data)
+    } catch (error) {
+      console.log('error userUpDate')
+      console.log(error)
+      reject(error)
+    }
+  })
+}
