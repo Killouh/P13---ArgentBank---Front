@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { profileFirstName, profileLastName, profileError } from '../../features/reducer/profilereduceur'
 import UserEdit from '../../components/useredit/useredit'
 
-
+// revoir les locales storage pour faire en redux 
 export default function Profile() {
   const dispatch = useDispatch();
   const { isRemember } = useSelector((state) => state.login);
@@ -30,7 +30,7 @@ export default function Profile() {
             localStorage.removeItem('lastName');
           }
 
-          isFirstResponse.current = false; // Marquer que la première réponse a été traitée
+          isFirstResponse.current = false; // no more render when first response
         }
       })
       .catch((error) => {

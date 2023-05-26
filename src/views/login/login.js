@@ -11,6 +11,8 @@ import {
 } from '../../features/reducer/loginreducer';
 
 
+// redux plutot que local storage / faire le remember me egalement
+
 
 export default function Login() {
   const { isRemember } = useSelector((state) => state.login)

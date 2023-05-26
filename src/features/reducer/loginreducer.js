@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
 const initialState = {
   isLoading: false,
   isAuth: false,
@@ -42,3 +43,5 @@ export const {
   logingRemember,
 } = actions
 export default reducer
+
+export const selectIsAuth = state => state.login.isAuth;
