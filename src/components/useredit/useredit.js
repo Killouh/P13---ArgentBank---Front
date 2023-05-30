@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   profilePending,
+  profileError,
   profileFirstName,
   profileLastName,
-  profileError,
 } from '../../features/reducer/profilereduceur'
 import { userUpDate } from '../../api/user'
 import './useredit.css';
@@ -12,16 +12,14 @@ import './useredit.css';
 
 function UserEdit() {
   const dispatch = useDispatch()
-  const localStorageFirstName = localStorage.getItem('firstName')
-  const localStorageLastName = localStorage.getItem('lastName')
-  const { firstName, lastName } = useSelector((state) => state.profile)
+  const { firstName, lastName } = useSelector((state) => state.profile);
 
   useEffect(() => {
-    if (localStorageFirstName && localStorageLastName) {
-      dispatch(profileFirstName(localStorageFirstName))
-      dispatch(profileLastName(localStorageLastName))
+    if (firstName && lastName) {
+      dispatch(profileFirstName(firstName));
+      dispatch(profileLastName(lastName));
     }
-  }, [dispatch, localStorageFirstName, localStorageLastName])
+  }, [dispatch, firstName, lastName]);
 
   const [editButton, setEditButton] = useState('')
   const [userFirstLastName, setUserFirstLastName] = useState({
@@ -43,15 +41,15 @@ function UserEdit() {
   }
 
   async function submitHandler(e) {
-    e.preventDefault()
-    dispatch(profilePending())
+    e.preventDefault();
+    dispatch(profilePending());
     try {
-      const newUser = await userUpDate(userFirstLastName)
-      dispatch(profileFirstName(newUser.body.firstName))
-      dispatch(profileLastName(newUser.body.lastName))
-      setEditButton((current) => !current)
+      const newUser = await userUpDate(userFirstLastName);
+      dispatch(profileFirstName(newUser.body.firstName));
+      dispatch(profileLastName(newUser.body.lastName));
+      setEditButton((current) => !current);
     } catch (error) {
-      dispatch(profileError(error.response.data.message))
+      dispatch(profileError(error.response.data.message));
     }
   }
 
