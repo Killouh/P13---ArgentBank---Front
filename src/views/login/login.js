@@ -8,6 +8,7 @@ import {
   logingSuccess,
   logingError,
   logingRemember,
+  storedToken,
 } from '../../features/reducer/loginreducer';
 
 
@@ -42,12 +43,9 @@ export default function Login() {
     dispatch(logingPending())
     try {
       const isAuth = await loginUser(credientials)
+
       if (isRemember) {
-        localStorage.setItem('token', isAuth.body.token)
-
-
-      } else {
-        localStorage.removeItem('token')
+        dispatch(storedToken({ token: isAuth.body.token, isRemember: true }));
       }
 
       dispatch(logingSuccess())

@@ -2,10 +2,9 @@ import {useEffect, useRef} from 'react';
 import './profile.css';
 import { profileUser } from '../../api/user';
 import { useDispatch, useSelector } from 'react-redux'
-import { profileFirstName, profileLastName, profileError, updateProfilInfo } from '../../features/reducer/profilereduceur'
+import { profileFirstName, profileLastName, profileError, storedProfilInfo } from '../../features/reducer/profilereduceur'
 import UserEdit from '../../components/useredit/useredit'
 
-// revoir les locales storage pour faire en redux 
 export default function Profile() {
   const dispatch = useDispatch();
   const { isRemember } = useSelector((state) => state.login);
@@ -23,7 +22,7 @@ export default function Profile() {
           dispatch(profileLastName(data.body.lastName));
 
           if (isRemember) {
-            dispatch(updateProfilInfo({ firstName: data.body.firstName, lastName: data.body.lastName, isRemember: true }));
+            dispatch(storedProfilInfo({ firstName: data.body.firstName, lastName: data.body.lastName, isRemember: true }));
           }
 
           isFirstResponse.current = false; // no more render when first response

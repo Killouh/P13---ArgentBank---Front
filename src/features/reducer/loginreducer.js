@@ -20,6 +20,10 @@ const loginSlice = createSlice({
       state.isAuth = true
       state.error = ''
     },
+    storedToken: (state, action) => {
+      state.token = action.payload;
+      state.error = ''
+    },
     logingError: (state, action) => {
       state.isLoading = false
       state.error = action.payload
@@ -41,6 +45,7 @@ export const {
   logingError,
   logingOut,
   logingRemember,
+  storedToken,
 } = actions
 export default reducer
 
