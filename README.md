@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+## Projet OC13 - Argent Bank
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Argent Bank is a banking application.
 
-## Available Scripts
+The user can login and consult his bank accounts and balance.
 
-In the project directory, you can run:
+This app use React, React Router, Redux, and Axios.
 
-### `npm start`
+Design based for a Desktop version of minimum 350px x 690px.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## To run this project you need :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1.Git
 
-### `npm test`
+2.NodeJs
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3.npm
 
-### `npm run build`
+4.Vscode(recommended)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    React 
 
-### `npm run eject`
+    Axios 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    React-router-dom
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    Redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+# How to:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## To use this apllication you need the backend :
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    Clone the Back-End repository : git clone https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API
+    Follow instructions in the README of this repo
 
-### Code Splitting
+## Setup and start the Front-End application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    Clone the Front-End repository : git clone https://github.com/Killouh/P13---ArgentBank---Front
+    Launch new terminal and install dependencies : npm install
+    Launch Front-End on port 3000 (default port): npm start
 
-### Analyzing the Bundle Size
+# Users :
+You can log in using one of the following credentials :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    Email : tony@stark.com
+    Password : password123
 
-### Making a Progressive Web App
+or
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    Email : steve@rogers.com
+    Password : password456
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
