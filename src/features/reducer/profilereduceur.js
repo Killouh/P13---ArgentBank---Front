@@ -27,7 +27,6 @@ const profileSlice = createSlice({
       },
       storedProfilInfo: (state, action) => {
         const { firstName, lastName } = action.payload;
-  
         state.firstName = firstName;
         state.lastName = lastName;
         state.error = '';

@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   profilePending,
   profileError,
   profileFirstName,
   profileLastName,
+  storedProfilInfo,
 } from '../../features/reducer/profilereduceur'
 import { userUpDate } from '../../api/user'
 import './useredit.css';
@@ -13,13 +14,8 @@ import './useredit.css';
 function UserEdit() {
   const dispatch = useDispatch()
   const { firstName, lastName } = useSelector((state) => state.profile);
+  const { isRemember } = useSelector((state) => state.login);
 
-  useEffect(() => {
-    if (firstName && lastName) {
-      dispatch(profileFirstName(firstName));
-      dispatch(profileLastName(lastName));
-    }
-  }, [dispatch, firstName, lastName]);
 
   const [editButton, setEditButton] = useState('')
   const [userFirstLastName, setUserFirstLastName] = useState({
@@ -47,6 +43,9 @@ function UserEdit() {
       const newUser = await userUpDate(userFirstLastName);
       dispatch(profileFirstName(newUser.body.firstName));
       dispatch(profileLastName(newUser.body.lastName));
+      if (isRemember) {
+        dispatch(storedProfilInfo({ firstName: newUser.body.firstName, lastName: newUser.body.lastName, isRemember: true }));
+      }
       setEditButton((current) => !current);
     } catch (error) {
       dispatch(profileError(error.response.data.message));
