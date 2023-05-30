@@ -12,9 +12,6 @@ import {
 } from '../../features/reducer/loginreducer';
 
 
-// redux plutot que local storage / faire le remember me egalement
-
-
 export default function Login() {
   const { isRemember } = useSelector((state) => state.login)
   const dispatch = useDispatch()
@@ -44,11 +41,10 @@ export default function Login() {
     try {
       const isAuth = await loginUser(credientials)
 
-      if (isRemember) {
-        dispatch(storedToken({ token: isAuth.body.token, isRemember: true }));
-      }
-
-      dispatch(logingSuccess())
+      const rememberValue = isRemember ? true : false;
+      dispatch(logingSuccess({ token: isAuth.body.token, remember: rememberValue }));
+      dispatch(storedToken({ token: isAuth.body.token, remember: rememberValue }));
+  
       navigate('/profile')
     } catch (error) {
       console.log(error)
