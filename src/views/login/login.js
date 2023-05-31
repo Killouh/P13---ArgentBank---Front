@@ -43,7 +43,11 @@ export default function Login() {
 
       const rememberValue = isRemember ? true : false;
       dispatch(logingSuccess({ token: isAuth.body.token, remember: rememberValue }));
-      dispatch(storedToken({ token: isAuth.body.token, remember: rememberValue }));
+      
+
+      if (isRemember) {
+        dispatch(storedToken({ token: isAuth.body.token, remember: rememberValue }));
+      }
   
       navigate('/profile')
     } catch (error) {
