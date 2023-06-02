@@ -1,33 +1,31 @@
-import './login.css';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../api/authentification';
-import { useNavigate } from 'react-router-dom'
+import "./login.css";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../api/authentification";
+import { useNavigate } from "react-router-dom";
 import {
   logingPending,
-  logingSuccess,
   logingError,
   logingRemember,
   storedToken,
-} from '../../features/reducer/loginreducer';
-
+} from "../../features/reducer/loginreducer";
 
 export default function Login() {
-  const { isRemember } = useSelector((state) => state.login)
-  const dispatch = useDispatch()
-  let navigate = useNavigate()
+  const { isRemember } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const [credientials, setCredientials] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
   function handleChange({ currentTarget }) {
-    const { value, name } = currentTarget
+    const { value, name } = currentTarget;
     setCredientials({
       ...credientials,
       [name]: value,
-    })
+    });
   }
 
   function errorDisplay(error) {
@@ -35,29 +33,20 @@ export default function Login() {
   }
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    dispatch(logingPending())
+    dispatch(logingPending());
     try {
-      const isAuth = await loginUser(credientials)
+      const isAuth = await loginUser(credientials);
+      dispatch(storedToken({ token: isAuth.body.token}));
 
-      const rememberValue = isRemember ? true : false;
-      dispatch(logingSuccess({ token: isAuth.body.token, remember: rememberValue }));
-      
-
-      if (isRemember) {
-        dispatch(storedToken({ token: isAuth.body.token, remember: rememberValue }));
-      }
-  
-      navigate('/profile')
+      navigate("/profile");
     } catch (error) {
-      console.log(error)
-      dispatch(logingError(error.response.data.message))
+      console.log(error);
+      dispatch(logingError(error.response.data.message));
       errorDisplay(error.response.data.message);
     }
   }
-
-
 
   return (
     <main className="main bg-dark">
@@ -71,7 +60,8 @@ export default function Login() {
               type="text"
               placeholder="Username"
               name="email"
-              onChange={handleChange} />
+              onChange={handleChange}
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
@@ -79,7 +69,8 @@ export default function Login() {
               type="password"
               placeholder="Password"
               name="password"
-              onChange={handleChange} />
+              onChange={handleChange}
+            />
           </div>
           <div className="input-remember">
             <input

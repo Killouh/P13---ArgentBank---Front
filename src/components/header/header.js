@@ -4,7 +4,7 @@ import argentBankLogo from '../../assets/argentBankLogo.png'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  logingOut,
+  logOut,
 } from '../../features/reducer/loginreducer'
 
 
@@ -16,7 +16,7 @@ export default function Header() {
   const loginTextRef = useRef(null)
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(logingOut());
+    dispatch(logOut());
 
   };
 

@@ -31,7 +31,7 @@ const loginSlice = createSlice({
     logingRemember: (state, action) => {
       state.isRemember = action.payload
     },
-    logingOut: (state) => {
+    logOut: (state) => {
       state.isLoading = false
       state.isAuth = false
       state.error = ''
@@ -43,7 +43,7 @@ export const {
   logingPending,
   logingSuccess,
   logingError,
-  logingOut,
+  logOut,
   logingRemember,
   storedToken,
 } = actions
