@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { URL_LOGIN } from './api_url.js';
 
+// Api call for login
 export async function loginUser(credientials) {
   return new Promise(async (resolve, reject) => {
     try {

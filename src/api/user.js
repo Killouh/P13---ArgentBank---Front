@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { URL_PROFILE } from './api_url.js';
 
+//Loading user profil data api
+
 export async function profileUser() {
   return new Promise(async (resolve, reject) => {
     try {
@@ -12,6 +14,8 @@ export async function profileUser() {
   })
 }
 
+
+// Modify user first and last name to db
 export async function userUpDate(userFirstLastName) {
   console.log(userFirstLastName)
   return new Promise(async (resolve, reject) => {
