@@ -21,7 +21,8 @@ export default function Header() {
   };
 
   let loginLink = null;
-
+  
+  //manage the login btn behavior
   if (isAuth) {
     loginLink = (
       <Link className="main-nav-item" to="/" onClick={handleLogout} ref={loginTextRef}>
