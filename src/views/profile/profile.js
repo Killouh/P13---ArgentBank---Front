@@ -20,6 +20,7 @@ export default function Profile() {
         if (isFirstResponse.current) {
           dispatch(profileFirstName(data.body.firstName));
           dispatch(profileLastName(data.body.lastName));
+          
 
           if (isRemember) {
             dispatch(storedProfilInfo({ firstName: data.body.firstName, lastName: data.body.lastName, isRemember: true }));

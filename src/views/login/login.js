@@ -8,6 +8,7 @@ import {
   logingError,
   logingRemember,
   storedToken,
+  logingSuccess,
 } from "../../features/reducer/loginreducer";
 
 export default function Login() {
@@ -39,7 +40,7 @@ export default function Login() {
     try {
       const isAuth = await loginUser(credientials);
       dispatch(storedToken({ token: isAuth.body.token}));
-
+      dispatch(logingSuccess({ token: isAuth.body.token}));
       navigate("/profile");
     } catch (error) {
       console.log(error);
